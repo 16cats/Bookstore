@@ -10,12 +10,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.bookstore.domain.Book;
 import com.example.bookstore.domain.BookRepository;
+import com.example.bookstore.domain.CategoryRepository;
 
 @Controller
 public class BookController {
 	@Autowired
 	private BookRepository repository;
 	
+	@Autowired
+	private CategoryRepository crepository;
+	
+	//get mapping is better than request here(?)
 	@GetMapping("/booklist")
 	public String bookList(Model model) {
 		model.addAttribute("books", repository.findAll());
@@ -25,7 +30,8 @@ public class BookController {
 		//for adding
 	    @RequestMapping(value = "/add")
 	    public String addBook(Model model){
-	    	model.addAttribute("book", new Book());
+			model.addAttribute("book", new Book());
+			model.addAttribute("categories", crepository.findAll());
 	        return "addbook";
 	    }     
 	    
@@ -35,6 +41,14 @@ public class BookController {
 	        repository.save(book);
 	        return "redirect:booklist";
 	    }    
+	    
+	    //for editing
+		@RequestMapping(value = "/edit/{id}")
+		public String edit(@PathVariable("id") Long bookId, Model model){
+			model.addAttribute("book", repository.findById(bookId));
+			model.addAttribute("categories", crepository.findAll());
+			return "editbook";
+		}
 	    
 	    //for deleting
 		@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
