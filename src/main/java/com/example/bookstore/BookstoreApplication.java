@@ -26,9 +26,9 @@ public class BookstoreApplication {
 	    	crepository.save(new Category("Classics"));
 	    	crepository.save(new Category("Finnish"));
 	    	
-			repository.save(new Book("The Secret History","Donna Tartt","123456",1992,19.90,crepository.findByName("Fiction").get(0)));
-			repository.save(new Book("The Stranger","Albert Camus","654321",1942,19.90,crepository.findByName("Classics").get(0)));
-			repository.save(new Book("Suuri Illusioni","Mika Waltari","000000",1928,19.90,crepository.findByName("Finnish").get(0)));
+			repository.save(new Book("The Secret History","Donna Tartt","123456",1992,19.95,crepository.findByName("Fiction").get(0)));
+			repository.save(new Book("The Stranger","Albert Camus","654321",1942,19.95,crepository.findByName("Classics").get(0)));
+			repository.save(new Book("Suuri Illusioni","Mika Waltari","000000",1928,19.95,crepository.findByName("Finnish").get(0)));
 
 	    };
 	}

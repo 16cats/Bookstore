@@ -30,10 +30,10 @@
             <label for="price">Price</label>
             <input type="text" id="price" th:field="*{price}" class="form-control"/>
             <div style="clear: both; display: block; height: 10px;"></div>
-            
-            			<label for="clist">Category</label>
-			<select id="clist" th:field="*{category}" class="form-control">
-				<option th:each="category: ${categories}" th:value="${category.category_id}" th:text="${category.name}"></option>
+           
+			<label for="catlist">Category</label>
+			<select id="catlist" th:field="*{category}" class="form-control">
+				<option th:each="category: ${categories}" th:value="${category.categoryid}" th:text="${category.name}"></option>
 			</select>
 			<div style="clear: both; display: block; height: 10px;"></div>
             
