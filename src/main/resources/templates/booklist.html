@@ -31,8 +31,8 @@
                 <td th:text="${book.publicationYear}"></td>
                 <td th:text="${book.category.name}"></td>
                 <td th:text="${book.price} + €"></td>
-                <td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger" th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
                 <td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-primary" th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>
+                <td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger" th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
             </tr>
         </tbody>
     </table>
