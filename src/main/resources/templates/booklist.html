@@ -1,12 +1,17 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
-    <title>Book list</title>
-    <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
-    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+<title>Book list</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" /> 
 </head>
 <body>
-    <h1>Books</h1>
+    <div class="container">
+        <h1 th:inline="text">Bookstore</h1>
+        <h5 th:inline="text">Welcome <span sec:authentication="name"></span></h5>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out" class="btn btn-danger"/>
+        </form>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -25,16 +30,13 @@
                 <td th:text="${book.isbn}"></td>
                 <td th:text="${book.publicationYear}"></td>
                 <td th:text="${book.category.name}"></td>
-                <td th:text="${book.price} + ' €'"></td>
-                <td>
-                    <a class="btn btn-primary" th:href="@{/edit/{id}(id=${book.id})}">Edit</a>
-                </td>
-                <td>
-                    <a class="btn btn-danger" th:href="@{/delete/{id}(id=${book.id})}">Delete</a>
-                </td>
+                <td th:text="${book.price} + €"></td>
+                <td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger" th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
+                <td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-primary" th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>
             </tr>
         </tbody>
     </table>
-    <a th:href="@{/add}" class="btn btn-success">Add Book</a>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" href="/add" class="btn btn-success">Add book</a>
+    </div>
 </body>
 </html>

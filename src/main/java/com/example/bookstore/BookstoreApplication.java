@@ -10,6 +10,8 @@ import com.example.bookstore.domain.Book;
 import com.example.bookstore.domain.BookRepository;
 import com.example.bookstore.domain.Category;
 import com.example.bookstore.domain.CategoryRepository;
+import com.example.bookstore.domain.AppUser;
+import com.example.bookstore.domain.AppUserRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -19,7 +21,7 @@ public class BookstoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(BookRepository repository, CategoryRepository crepository) {
+	public CommandLineRunner demo(BookRepository repository, CategoryRepository crepository, AppUserRepository urepository) {
 	    return (args) -> {
 	    	
 	    	crepository.save(new Category("Fiction"));
@@ -30,6 +32,8 @@ public class BookstoreApplication {
 			repository.save(new Book("The Stranger","Albert Camus","654321",1942,19.95,crepository.findByName("Classics").get(0)));
 			repository.save(new Book("Suuri Illusioni","Mika Waltari","000000",1928,19.95,crepository.findByName("Finnish").get(0)));
 
+			urepository.save(new AppUser("user", "$2a$10$Qj1vqITgY1CC1UaBH8npEOyJNrGQfB0fWy.ZvfZXkgbtJEiWM3Ceu","user@user.fi", "USER"));
+			urepository.save(new AppUser("admin", "$2a$10$vNFI2ZSmC4MeGXIrVqcsN.rap8CLaipyU/Qci499B8HKruTg5mtrq", "admin@admin.fi", "ADMIN"));
 	    };
 	}
 }

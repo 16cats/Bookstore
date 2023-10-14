@@ -1,6 +1,7 @@
 package com.example.bookstore.web;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,12 @@ public class BookController {
     public @ResponseBody List<Book> bookListRest() {	
         return (List<Book>) repository.findAll();
     }  
+    
+	// Rest book by id http://localhost:8080/book/1
+    @RequestMapping(value="/book/{id}", method = RequestMethod.GET)
+    public @ResponseBody Optional<Book> findBookRest(@PathVariable("id") Long bookId) {	
+    	return repository.findById(bookId);
+    }     
 	
 	//get mapping is better than request here(?)
 	@GetMapping("/booklist")
